@@ -1,0 +1,94 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class MovementPlayer : MonoBehaviour
+{
+
+    private Rigidbody2D rb2D;
+
+    [Header("Movement")]
+
+    private float horizontalMovement = 0f;
+    [SerializeField] private float speedMovement;
+    [Range(0, 0.3f)][SerializeField] private float smothMovement;
+    private Vector3 speed = Vector3.zero;
+    private bool lookingRight = true;
+
+    [Header("Jump")]
+    [SerializeField] private float jumpForce;
+    [SerializeField] private LayerMask whatGround;
+    [SerializeField] private Transform groundController;
+    [SerializeField] private Vector3 boxDimensions;
+    [SerializeField] private bool onGround;
+    private bool jump = false;
+
+    [Header("Animation")]
+    private Animator animator;
+
+    void Start()
+    {
+        rb2D = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();
+    }
+
+    private void Update()
+    {
+        horizontalMovement = Input.GetAxisRaw("Horizontal") * speedMovement;
+
+        animator.SetFloat("Horizontal", Mathf.Abs(horizontalMovement));
+        animator.SetFloat("SpeedY", rb2D.velocity.y);
+
+        if (Input.GetButtonDown("Jump")) 
+        {
+            jump = true;
+        }
+    }
+
+    private void FixedUpdate()
+    {
+        onGround = Physics2D.OverlapBox(groundController.position, boxDimensions, 0f, whatGround);
+        animator.SetBool("onGround", onGround);
+        //Move   
+        Move(horizontalMovement * Time.fixedDeltaTime, jump);
+
+        jump = false;
+    }
+
+    private void Move(float move, bool jump)
+    {
+        Vector3 speedObjective = new Vector2(move, rb2D.velocity.y);
+        rb2D.velocity = Vector3.SmoothDamp(rb2D.velocity, speedObjective, ref speed, smothMovement);
+
+        if (move > 0 && !lookingRight)
+        {
+            //Turn
+            Turn();
+        }else if(move < 0 && lookingRight)
+        {
+            //Turn
+            Turn();
+        }
+
+        if (onGround && jump)
+        {
+            onGround = false;
+            rb2D.AddForce(new Vector2(0f, jumpForce));
+        }
+    }
+
+    private void Turn()
+    {
+        lookingRight = !lookingRight;
+        Vector3 scala = transform.localScale;
+        scala.x *= -1;
+        transform.localScale = scala;
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireCube(groundController.position, boxDimensions);
+    }
+
+}
