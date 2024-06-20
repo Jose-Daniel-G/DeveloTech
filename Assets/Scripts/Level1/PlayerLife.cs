@@ -20,15 +20,17 @@ public class PlayerLife : MonoBehaviour
     }
     
     private void Update(){
-        if (Input.GetButtonDown("Fire1"))
-        {
-            Damage(valorPrueba);
-        }
 
-        if (Input.GetButtonDown("Fire2"))
-        {
-            HealLife(valorPrueba);
-        }
+        //This code works with click rigth and click left, It gives life and takes life 
+        // if (Input.GetButtonDown("Fire1"))
+        // {
+        //     Damage(valorPrueba);
+        // }
+
+        // if (Input.GetButtonDown("Fire2"))
+        // {
+        //     HealLife(valorPrueba);
+        // }
     }
 
     public void Damage(int amountDamage){

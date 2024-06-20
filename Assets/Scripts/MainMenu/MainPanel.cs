@@ -16,8 +16,10 @@ public class MainPanel : MonoBehaviour
 
     [Header("Panels")]
     public GameObject mainPanel;
-    public GameObject optionsPanel;
     public GameObject levelSelectPanel;
+    public GameObject optionsPanel;
+    public GameObject helpPanel;
+    
 
 
     private void Awake()
@@ -55,6 +57,7 @@ public class MainPanel : MonoBehaviour
         mainPanel.SetActive(false);
         optionsPanel.SetActive(false);
         levelSelectPanel.SetActive(false);
+        helpPanel.SetActive(false);
 
         panel.SetActive(true);
         PlaySoundButton();
