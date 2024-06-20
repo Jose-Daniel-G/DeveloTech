@@ -6,9 +6,9 @@ using UnityEngine.SceneManagement;
 public class MainPanel : MonoBehaviour
 {
     [Header("Options")]
-    //public Slider volumeFX;
-    //public Slider volumeMaster;
-    //public Toggle mute;
+    public Slider volumeFX;
+    public Slider volumeMaster;
+    public Toggle mute;
     public AudioMixer mixer;
     public AudioSource fxSource;
     public AudioClip clickSound;
@@ -24,8 +24,8 @@ public class MainPanel : MonoBehaviour
 
     private void Awake()
     {
-        //volumeFX.onValueChanged.AddListener(ChangeVolumeFX);
-        //volumeMaster.onValueChanged.AddListener(ChangeVolumeMaster);
+        volumeFX.onValueChanged.AddListener(ChangeVolumeFX);
+        volumeMaster.onValueChanged.AddListener(ChangeVolumeMaster);
     }
 
     public void PlayLevel(string levelName)
@@ -41,16 +41,16 @@ public class MainPanel : MonoBehaviour
     {
         Application.Quit();
     }
-    //public void SetMute()
-    //{
-    //    if (mute.isOn)
-    //    {
-    //        mixer.GetFloat("VolMaster", out lastVolume);
-    //        mixer.SetFloat("VolMaster", -80);
-    //    }
-    //   else
-    //        mixer.SetFloat("VolMaster", lastVolume);
-    //}
+    public void SetMute()
+    {
+       if (mute.isOn)
+       {
+           mixer.GetFloat("VolMaster", out lastVolume);
+           mixer.SetFloat("VolMaster", -80);
+       }
+      else
+           mixer.SetFloat("VolMaster", lastVolume);
+    }
 
     public void OpenPanel(GameObject panel)
     {
