@@ -11,4 +11,9 @@ public class ObjectDamage : MonoBehaviour
             playerLife.Damage(damage);
         }
     }
+    // private void OnTriggerEnter2D(Collider2D collider){
+    //     if (collider.TryGetComponent(out PlayerCombat playerCombat)){
+    //         playerCombat.Damage(damage);
+    //     }
+    // }
 }

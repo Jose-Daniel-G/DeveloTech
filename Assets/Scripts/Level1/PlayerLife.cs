@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using System;
 
 public class PlayerLife : MonoBehaviour
 {
@@ -9,6 +10,8 @@ public class PlayerLife : MonoBehaviour
     public int actualLife, maxLife, valorPrueba;
 
     public UnityEvent<int> changeLife;
+
+    public event EventHandler deathPlayer;
 
     private void Start()
     {
@@ -40,6 +43,7 @@ public class PlayerLife : MonoBehaviour
         changeLife.Invoke(actualLife);
 
         if(actualLife <= 0){
+            deathPlayer?.Invoke(this, EventArgs.Empty);
             Destroy(gameObject);
         }
 
