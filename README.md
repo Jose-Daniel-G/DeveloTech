@@ -1,1 +1,1 @@
-I'm doing this projecto for my graduationThis project is being developed as part of my graduation requirements.
+I'm doing this project for my graduationThis project is being developed as part of my graduation requirements.
