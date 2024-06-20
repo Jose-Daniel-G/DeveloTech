@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 35592671ef7f92f42b513a720e631959
+guid: a3de5771bdd24df449ecb21c36357739
 TrueTypeFontImporter:
   externalObjects: {}
   serializedVersion: 4
@@ -9,7 +9,7 @@ TrueTypeFontImporter:
   characterPadding: 1
   includeFontData: 1
   fontNames:
-  - Roboto
+  - ARCO Typography
   fallbackFontReferences: []
   customCharacters: 
   fontRenderingMode: 0
