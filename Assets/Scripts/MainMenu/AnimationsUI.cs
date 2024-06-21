@@ -10,6 +10,7 @@ public class AnimationsUI : MonoBehaviour
     [SerializeField] private GameObject acceptQuitGame;
     [SerializeField] private RectTransform logoAnimation;
 
+    bool activate = true;
     private void Start()
     {
         LeanTween.moveX(logo.GetComponent<RectTransform>(), 0, 1.5f).setDelay(2.5f).setEase(LeanTweenType.easeOutBounce).setOnComplete(LowerAlpha);
@@ -28,9 +29,14 @@ public class AnimationsUI : MonoBehaviour
         LeanTween.scale(title.GetComponent<RectTransform>(), new Vector3(1, 1, 1), 0.5f);
     }
 
-    public void ActivateExtraMenu()
-    {
-        LeanTween.moveY(extraMenu.GetComponent<RectTransform>(), -500, 1f).setEase(LeanTweenType.easeOutElastic);
+    public void ActivateExtraMenu(){
+        if(activate){
+            LeanTween.moveY(extraMenu.GetComponent<RectTransform>(), -500, 1f).setEase(LeanTweenType.easeOutElastic);
+            activate = false;
+        }else{
+            LeanTween.moveY(extraMenu.GetComponent<RectTransform>(), 337, 1f).setEase(LeanTweenType.easeOutElastic);
+            activate = true;
+        }
     }
 
     public void OpenQuitMenu()
