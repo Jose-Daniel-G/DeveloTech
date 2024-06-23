@@ -3,24 +3,29 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemyMushroom : MonoBehaviour
-{   
+{
+    [SerializeField] private GameObject efecto;
     private Animator animator;
 
-    private void Start(){
+    private void Start()
+    {
         animator = GetComponent<Animator>();
     }
 
-    private void OnCollisionEnter2D(Collision2D other){
+    private void OnCollisionEnter2D(Collision2D other)
+    {
         if (other.gameObject.CompareTag("Player"))
         {
-            foreach (ContactPoint2D point in other.contacts)
+            if (other.GetContact(0).normal.y <= -0.9)
             {
-                if (point.normal.y <= -0.9)
-                {
-                    animator.SetTrigger("Golpe");
-                    other.gameObject.GetComponent<MovementPlayer>().Bounce();
-                }
+                animator.SetTrigger("Hit");
+                other.gameObject.GetComponent<MovementPlayer>().Bounce();
             }
         }
+    }
+
+    private void Hit(){
+        Instantiate(efecto, transform.position, transform.rotation);
+        Destroy(gameObject);
     }
 }
