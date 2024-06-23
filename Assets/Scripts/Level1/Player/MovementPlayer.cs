@@ -23,6 +23,10 @@ public class MovementPlayer : MonoBehaviour
     [SerializeField] private bool onGround;
     private bool jump = false;
 
+    [Header("Bounce")]
+    [SerializeField] private float bounceSpeed;
+
+
     [Header("Animation")]
     private Animator animator;
 
@@ -89,6 +93,10 @@ public class MovementPlayer : MonoBehaviour
     {
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireCube(groundController.position, boxDimensions);
+    }
+
+    public void Bounce(){
+        rb2D.velocity = new Vector2(rb2D.velocity.x, bounceSpeed);
     }
 
 }
