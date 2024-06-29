@@ -21,6 +21,7 @@ public class MovementPlayer : MonoBehaviour
     [SerializeField] private Transform groundController;
     [SerializeField] private Vector3 boxDimensions;
     [SerializeField] private bool onGround;
+    
     private bool jump = false;
 
     [Header("Bounce")]
@@ -29,6 +30,10 @@ public class MovementPlayer : MonoBehaviour
 
     [Header("Animation")]
     private Animator animator;
+
+    [Header("Sounds")]
+
+    [SerializeField] private AudioSource jumpSound;
 
     void Start()
     {
@@ -46,6 +51,7 @@ public class MovementPlayer : MonoBehaviour
         if (Input.GetButtonDown("Jump")) 
         {
             jump = true;
+            jumpSound.Play();
         }
     }
 
