@@ -22,7 +22,27 @@ public class UnityLoginLogutRegister : MonoBehaviour
     [Space]
     public InputField usernameLog;
     public InputField passwordLog;
-    public Text infoLog;
+    // public Text infoLog;
+
+    private string currentUsername;
+    private string ukey = "accountUsername";
+
+    void Start()
+    {
+        currentUsername = "";
+
+        if (PlayerPrefs.HasKey(ukey))
+        {
+            if (PlayerPrefs.GetString(ukey) != "")
+            {
+                currentUsername = PlayerPrefs.GetString(ukey);
+                // info.text = "Has iniciado sesión = " + currentUsername;
+            }else{
+                info.text = "No has iniciado sesión. ";
+            }
+                // info.text = "No has iniciado sesión. ";
+        }
+    }
 
     public void AccountRegister()
     {
@@ -37,6 +57,12 @@ public class UnityLoginLogutRegister : MonoBehaviour
         string user = usernameLog.text;
         string pass = passwordLog.text;
         StartCoroutine(LoginAccount(user, pass));
+    }
+
+    public void AccountLogout(){
+        currentUsername = "";
+        PlayerPrefs.SetString(ukey, currentUsername);
+        info.text = "Has cerrado sesión. ";
     }
 
     IEnumerator RegisterNewAccount(string username, string password)
@@ -79,9 +105,20 @@ public class UnityLoginLogutRegister : MonoBehaviour
             else
             {
                 string responseText = www.downloadHandler.text;
-                Debug.Log("Response = " + responseText);
-                info.text = "Response = " + responseText;
-                
+                if (responseText == "1")
+                {
+                    PlayerPrefs.SetString(ukey, username);
+                    info.text = "Inicio de sesión exitoso del usuario " + username;
+                    SceneManager.LoadSceneAsync("MainMenu");
+                }
+                else
+                {
+                    info.text = "Inicio de sesión fallido " + username;
+                    // PlayerPrefs.SetString("accountUsername", "");
+                }
+                // Debug.Log("Response = " + responseText);
+                // info.text = "Response = " + responseText;
+
             }
         }
     }

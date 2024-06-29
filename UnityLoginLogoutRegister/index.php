@@ -26,10 +26,11 @@ if (isset($_POST["username"])){
         //Check are entered username and password matched
         $sql = "SELECT * FROM users WHERE username = '$username' AND password = '$password'";
         if (mysqli_num_rows(mysqli_query($connection, $sql)) > 0) {
-            echo "Inicio exitoso! Usuario ".$username." y Contraseña ".$password;
-            
+            echo 1;
+            // echo "Inicio exitoso! Usuario ".$username." y Contraseña ".$password;
         }else{
-            echo "Fallo de Inicio! Usuario incorrecto o/y Contraseña";
+           echo 2;
+            // echo "Fallo de Inicio! Usuario incorrecto o/y Contraseña";
         }
     }else{
         echo "Ambos campos son requeridos";
