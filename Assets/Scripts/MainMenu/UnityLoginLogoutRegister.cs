@@ -83,7 +83,7 @@ public class UnityLoginLogutRegister : MonoBehaviour
             {
                 string responseText = www.downloadHandler.text;
                 Debug.Log("Response = " + responseText);
-                info.text = "Response = " + responseText;
+                info.text = responseText;
             }
         }
     }
@@ -113,10 +113,12 @@ public class UnityLoginLogutRegister : MonoBehaviour
                     Debug.Log("Ir al menu de inicio");
                     SceneManager.LoadScene("MainMenu");
                 }
-                else
+                else if (responseText == "2")
                 {
-                    info.text = "Inicio de sesión fallido " + username;
+                    info.text = "Contraseña incorrecta" + username;
                     // PlayerPrefs.SetString("accountUsername", "");
+                }else{
+                    info.text = "El usuario " + username + "no ha sido encontrado";
                 }
                 // Debug.Log("Response = " + responseText);
                 // info.text = "Response = " + responseText;

@@ -2,39 +2,57 @@
 
 include("config.php");
 
-if (isset($_POST["username"])){
+// REGISTER
+if (isset($_POST["username"])) {
     $username = mysqli_real_escape_string($connection, $_POST["username"]);
     $password = mysqli_real_escape_string($connection, $_POST["password"]);
-    //check they are empty?
+    // Verificar que los campos no estén vacíos
     if ($username != "" && $password != "") {
-        //Check if the username has not taken
+        // Verificar si el nombre de usuario no está tomado
         if (mysqli_num_rows(mysqli_query($connection, "SELECT * FROM users WHERE username = '$username'")) == 0) {
-            mysqli_query($connection, "INSERT INTO users(username, password) VALUES('$username', '$password')");
-            echo "Registrando nueva cuenta: Usuario ".$username." y contraseña: ".$password;
-        }else{
-            echo "Este usuario no esta disponible. Por favor cree otro usuario";
+            // Encriptar la contraseña
+            $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+
+            // Insertar el usuario con la contraseña encriptada
+            mysqli_query($connection, "INSERT INTO users(username, password) VALUES('$username', '$hashedPassword')");
+            echo "Registrando nueva cuenta: Usuario " . $username;
+        } else {
+            echo "Este usuario no está disponible. Por favor cree otro usuario.";
         }
-    }else{
-        echo "Ambos campos son requeridos";
+    } else {
+        echo "Ambos campos son requeridos.";
     }
 
-}else if (isset($_POST["loginUsername"])){
+// LOGIN
+} else if (isset($_POST["loginUsername"])) {
     $username = mysqli_real_escape_string($connection, $_POST["loginUsername"]);
     $password = mysqli_real_escape_string($connection, $_POST["loginPassword"]);
-    //check they are empty?
+    // Verificar que los campos no estén vacíos
     if ($username != "" && $password != "") {
-        //Check are entered username and password matched
-        $sql = "SELECT * FROM users WHERE username = '$username' AND password = '$password'";
-        if (mysqli_num_rows(mysqli_query($connection, $sql)) > 0) {
-            echo 1;
-            // echo "Inicio exitoso! Usuario ".$username." y Contraseña ".$password;
-        }else{
-           echo 2;
-            // echo "Fallo de Inicio! Usuario incorrecto o/y Contraseña";
+        // Buscar el usuario en la base de datos
+        $sql = "SELECT * FROM users WHERE username = '$username'";
+        $result = mysqli_query($connection, $sql);
+
+        if (mysqli_num_rows($result) > 0) {
+            $user = mysqli_fetch_assoc($result);
+            // Verificar la contraseña encriptada
+            if (password_verify($password, $user['password'])) {
+                echo 1; // Inicio exitoso
+                // Aquí puedes iniciar la sesión y redirigir al usuario a la página deseada
+                session_start();
+                $_SESSION['username'] = $username;
+                // header("Location: dashboard.php"); // Redirigir a la página de inicio después de iniciar sesión
+                // exit();
+            } else {
+                echo 2; // Contraseña incorrecta
+            }
+        } else {
+            echo 3; // Usuario no encontrado
         }
-    }else{
-        echo "Ambos campos son requeridos";
+    } else {
+        echo "Ambos campos son requeridos.";
     }
-}else{
+} else {
     echo "Unity Login, Logout and Register";
 }
+?>

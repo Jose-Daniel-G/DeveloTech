@@ -17,9 +17,8 @@ public class LoginSounds : MonoBehaviour
     [Header("Panels")]
     public GameObject mainPanel;
     public GameObject createAcount;
-    // public GameObject optionsPanel;
-    // public GameObject helpPanel;
-    
+    public GameObject title;
+
 
 
     private void Awake()
@@ -32,34 +31,18 @@ public class LoginSounds : MonoBehaviour
     {
         SceneManager.LoadScene(levelName);
     }
-    //public void PlayLevel(int levelNumber)
-    //{
-    //    SceneManager.LoadScene(levelNumber);
-    //}
-
+    
     public void ExitGame()
     {
         Application.Quit();
     }
-    // public void SetMute()
-    // {
-    //    if (mute.isOn)
-    //    {
-    //        mixer.GetFloat("VolMaster", out lastVolume);
-    //        mixer.SetFloat("VolMaster", -80);
-    //    }
-    //   else
-    //        mixer.SetFloat("VolMaster", lastVolume);
-    // }
 
     public void OpenPanel(GameObject panel)
     {
         mainPanel.SetActive(false);
         createAcount.SetActive(false);
-        // levelSelectPanel.SetActive(false);
-        // helpPanel.SetActive(false);
-
         panel.SetActive(true);
+        title.SetActive(!title.activeSelf);
         PlaySoundButton();
     }
 
