@@ -109,7 +109,9 @@ public class UnityLoginLogutRegister : MonoBehaviour
                 {
                     PlayerPrefs.SetString(ukey, username);
                     info.text = "Inicio de sesión exitoso del usuario " + username;
-                    SceneManager.LoadSceneAsync("MainMenu");
+                    // SceneManager.LoadSceneAsync("MainMenu");
+                    Debug.Log("Ir al menu de inicio");
+                    SceneManager.LoadScene("MainMenu");
                 }
                 else
                 {

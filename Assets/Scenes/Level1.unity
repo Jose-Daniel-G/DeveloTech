@@ -7232,8 +7232,8 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 210187449}
         m_TargetAssemblyTypeName: PauseMenu, Assembly-CSharp
-        m_MethodName: PlayLevel
-        m_Mode: 3
+        m_MethodName: MainMenu
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -33868,7 +33868,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300072, guid: 1eaee135ce037439d925cee5e41ce026, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 56738b04452622646a5078df96a8d394, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

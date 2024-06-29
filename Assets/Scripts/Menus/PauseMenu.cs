@@ -1,3 +1,5 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -44,20 +46,23 @@ public class PauseMenu : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
-    //public void MainMenu()
-    //{
-    //    SceneManager.LoadScene(0);
-    //}
+    public void MainMenu()
+    {
+        Time.timeScale = 1f;
+        Debug.Log("Ir al menu de inicio");
+        SceneManager.LoadScene("MainMenu");
+    }
+
     //public void PlayLevel(string levelName)
     
-    public void PlayLevel(int levelNumber)
-    {
-        pausedGame = false;
-        Time.timeScale = 1f;
-        SceneManager.LoadScene(levelNumber);
+    // public void PlayLevel(int levelNumber)
+    // {
+    //     pausedGame = false;
+    //     Time.timeScale = 1f;
+    //     SceneManager.LoadScene(levelNumber);
  
-        //SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-    }
+    //     //SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    // }
 
     public void Quit()
     {

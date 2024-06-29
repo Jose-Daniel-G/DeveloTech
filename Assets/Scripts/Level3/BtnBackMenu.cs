@@ -9,10 +9,10 @@ public class BtnBackMenu : MonoBehaviour
     public AudioMixer mixer;
     public AudioSource fxSource;
     public AudioClip clickSound;
-    public void BackToMenu()
+    public void MainMenu()
     {
         Debug.Log("Ir al menu de inicio");
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene(1);
         PlaySoundButton();
     }
 
