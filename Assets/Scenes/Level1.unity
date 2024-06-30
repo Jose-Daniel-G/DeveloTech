@@ -32605,7 +32605,7 @@ Transform:
   m_GameObject: {fileID: 830605504}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 42.129852, y: 1.3321099, z: 0}
+  m_LocalPosition: {x: 57.39, y: 1.43, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -32798,6 +32798,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nextLevel: Level2
+  sound: {fileID: 830605507}
 --- !u!1 &869966648
 GameObject:
   m_ObjectHideFlags: 0

@@ -6,15 +6,30 @@ using UnityEngine.SceneManagement;
 public class NextLevel : MonoBehaviour
 {
     public string nextLevel;
+    [SerializeField] private AudioSource sound;
 
-    // OnTriggerEnter2D is called when the Collider2D other enters the trigger (2D physics only)
     private void OnTriggerEnter2D(Collider2D collider)
     {
-        // Check if the collided object has the tag "NextLevel"
+        // Check if the collided object has the tag "Player"
         if (collider.CompareTag("Player"))
         {
-            // Load the next level
-            SceneManager.LoadScene(nextLevel);
+            // Start the coroutine to wait for the sound to finish
+            StartCoroutine(WaitForSoundAndLoadLevel());
         }
+    }
+
+    private IEnumerator WaitForSoundAndLoadLevel()
+    {
+        // Play the sound
+        sound.Play();
+
+        // Wait until the sound has finished playing
+        while (sound.isPlaying)
+        {
+            yield return null;
+        }
+
+        // Load the next level
+        SceneManager.LoadScene(nextLevel);
     }
 }
