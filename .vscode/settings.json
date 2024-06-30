@@ -56,5 +56,5 @@
         "temp/": true,
         "Temp/": true
     },
-    "dotnet.defaultSolution": "BravePixelG_platformer.sln"
+    "dotnet.defaultSolution": "prototipo_b.sln"
 }

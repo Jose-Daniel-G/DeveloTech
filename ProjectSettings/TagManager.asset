@@ -7,6 +7,8 @@ TagManager:
   - Apple
   - Orange
   - Strawberry
+  - Ground
+  - Enemy
   layers:
   - Default
   - TransparentFX

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
 using UnityEngine.SceneManagement;
 
 public class PauseMenu : MonoBehaviour
@@ -8,6 +9,11 @@ public class PauseMenu : MonoBehaviour
     [SerializeField] private GameObject btnPause;
     [SerializeField] private GameObject pauseMenu;
     private bool pausedGame = false;
+
+    [Header("Sounds")]
+    public AudioMixer mixer;
+    public AudioSource fxSource;
+    public AudioClip clickSound;
 
     private void Update()
     {
@@ -68,5 +74,18 @@ public class PauseMenu : MonoBehaviour
     {
         Debug.Log("Closing the game");
         Application.Quit();
+    }
+
+     public void ChangeVolumeMaster(float v)
+    {
+        mixer.SetFloat("VolMaster", v);
+    }
+    public void ChangeVolumeFX(float v)
+    {
+        mixer.SetFloat("VolFX", v);
+    }
+    public void PlaySoundButton()
+    {
+        fxSource.PlayOneShot(clickSound);
     }
 }

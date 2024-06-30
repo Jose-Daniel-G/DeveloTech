@@ -8,6 +8,7 @@ public class WinScriptLevel3 : MonoBehaviour
     private int currentPoints;
     public GameObject myObjects;
 
+    [SerializeField] private AudioSource winSound;
     void Start()
     {
         pointsToWin = myObjects.transform.childCount;
@@ -26,5 +27,10 @@ public class WinScriptLevel3 : MonoBehaviour
     public void AddPoints()
     {
         currentPoints++;
+        if (currentPoints >= pointsToWin)
+        {
+            //WIN
+            winSound.Play();
+        }
     }
 }

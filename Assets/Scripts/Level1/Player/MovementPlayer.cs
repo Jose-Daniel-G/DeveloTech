@@ -34,6 +34,7 @@ public class MovementPlayer : MonoBehaviour
     [Header("Sounds")]
 
     [SerializeField] private AudioSource jumpSound;
+     float knockbackForce = 10f;
 
     void Start()
     {
@@ -105,4 +106,15 @@ public class MovementPlayer : MonoBehaviour
         rb2D.velocity = new Vector2(rb2D.velocity.x, bounceSpeed);
     }
 
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Enemy"))
+        {
+            // Calcular dirección de retroceso
+            Vector2 knockbackDirection = (transform.position - collision.transform.position).normalized;
+
+            // Aplicar fuerza de retroceso
+            rb2D.velocity = knockbackDirection * knockbackForce;
+        }
+    }
 }
